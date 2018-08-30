@@ -42,6 +42,7 @@ export default class App extends React.Component {
             returnKeyType={"done"}
             autoCorrect={false}
             onSubmitEditing={this._addToDo}
+            underlineColorAndroid={"transparent"}
           />
           <ScrollView contentContainerStyle={styles.toDos}>
             {Object.values(toDos)
@@ -70,7 +71,7 @@ export default class App extends React.Component {
     try {
       const toDos = await AsyncStorage.getItem("toDos");
       const parsedTodos = JSON.parse(toDos);
-      this.setState({ loadedToDos: true, toDos: parsedTodos });
+      this.setState({ loadedToDos: true, toDos: parsedTodos || {} });
     } catch (err) {
       console.log(err);
     }
@@ -202,6 +203,7 @@ const styles = StyleSheet.create({
   input: {
     padding: 20,
     borderBottomColor: "#bbb",
+    borderBottomWidth: 1,
     fontSize: 25
   },
   toDos: {
